@@ -1,0 +1,91 @@
+<head>
+    <title>Your Page Title</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+{% include 'navbar.html' %}
+
+<h2>Matches for {{ base.full_name }}</h2>
+
+<form method="POST" class="filter-form">
+    <label><input type="checkbox" name="use_filters" {% if use_filters %}checked{% endif %}> Apply Filters</label>
+
+    <label>Caste:
+        <input type="text" name="caste" value="{{ caste }}">
+    </label>
+
+    <label>Religion:
+        <input type="text" name="religion" value="{{ religion }}">
+    </label>
+
+    <label>Occupation:
+        <input type="text" name="occupation" value="{{ occupation }}">
+    </label>
+
+    <label>Income:
+        <input type="number" name="min_income" placeholder="Min" value="{{ min_income }}" style="width: 70px;">
+        -
+        <input type="number" name="max_income" placeholder="Max" value="{{ max_income }}" style="width: 70px;">
+    </label>
+
+    <label>Diet:
+        <select name="diet">
+            <option value="">Any</option>
+            <option value="Vegetarian" {% if diet == 'Vegetarian' %}selected{% endif %}>Vegetarian</option>
+            <option value="Non-Vegetarian" {% if diet == 'Non-Vegetarian' %}selected{% endif %}>Non-Vegetarian</option>
+        </select>
+    </label>
+
+    <label>Drinking:
+        <select name="drinking">
+            <option value="">Any</option>
+            <option value="Yes" {% if drinking == 'Yes' %}selected{% endif %}>Yes</option>
+            <option value="No" {% if drinking == 'No' %}selected{% endif %}>No</option>
+        </select>
+    </label>
+
+    <label>Smoking:
+        <select name="smoking">
+            <option value="">Any</option>
+            <option value="Yes" {% if smoking == 'Yes' %}selected{% endif %}>Yes</option>
+            <option value="No" {% if smoking == 'No' %}selected{% endif %}>No</option>
+        </select>
+    </label>
+
+    <label>City:
+        <input type="text" name="city" value="{{ city }}">
+    </label>
+
+    <label>Age:
+        <input type="number" name="min_age" value="{{ min_age }}" style="width: 60px;">
+        to
+        <input type="number" name="max_age" value="{{ max_age }}" style="width: 60px;">
+    </label>
+
+    <button type="submit">Search</button>
+</form>
+
+
+
+{% if results %}
+    <h3>Matching Profiles:</h3>
+    <div class="profile-grid">
+        {% for profile in results %}
+        <div class="profile-card">
+            <strong>{{ profile.full_name }}</strong> ({{ profile.age }}, {{ profile.caste }}, {{ profile.gender }})<br>
+            {% if profile.photo_filename %}
+                <img src="{{ url_for('static', filename='uploads/' + profile.photo_filename) }}" height="100"><br>
+            {% else %}
+                <em>No photo uploaded</em><br>
+            {% endif %}
+            <ul>
+                <li><strong>Caste Match:</strong> {{ 'Yes' if profile.match_caste else 'No' }}</li>
+                <li><strong>Occupation Match:</strong> {{ 'Yes' if profile.match_occupation else 'No' }}</li>
+                <li><strong>Age Difference:</strong> {{ profile.age_diff }} years</li>
+            </ul>
+            <a href="{{ url_for('view_profile', profile_id=profile.id) }}" class="btn">View Full Details</a>
+        </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <p>No matches found.</p>
+{% endif %}

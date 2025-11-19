@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>News | Matrimony Bliss</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style1.css') }}">
+</head>
+
+<body>
+<a href="https://api.whatsapp.com/send/?phone=9092325438&text=Hi%2C%20I%20am%20interested%20in%20registering%20on%20your%20Matrimony%20Bliss%20platform.%20Please%20guide%20me%20through%20the%20next%20steps.&type=phone_number&app_absent=0"
+   class="whatsapp-float"
+   target="_blank"
+   title="Chat with us on WhatsApp">
+  <img src="https://img.icons8.com/ios-filled/50/ffffff/whatsapp--v1.png" alt="WhatsApp Chat" />
+</a>
+
+  <button class="mode-toggle" onclick="toggleMode()">Toggle Mode</button>
+
+  <header>Matrimony Bliss</header>
+
+  <nav>
+    <a href="{{ url_for('home') }}">Home</a>
+    <a href="{{ url_for('news') }}">News</a>
+    <a href="{{ url_for('about') }}">About Us</a>
+    <a href="{{ url_for('contact') }}">Contact Us</a>
+    <a href="{{ url_for('login') }}">Login</a>
+  </nav>
+  <div class="container1">
+
+  {% for blog in blogs %}
+                <div class="blog-card">
+                    <h2>{{ blog.title }}</h2>
+                    {% if blog.image_filename %}
+                        <img src="{{ url_for('static', filename='uploads/blogs/' + blog.image_filename) }}" alt="Blog Image">
+                    {% endif %}
+                    <p>{{ blog.content }}</p>
+
+                    
+
+                        </form>
+                    </div>
+                
+            {% endfor %}
+
+</div>
+  
+
+  <footer>&copy; 2025 Matrimony Bliss. All rights reserved.</footer>
+
+  <script>
+    function toggleMode() {
+      document.body.classList.toggle("dark-mode");
+    }
+
+    const sections = document.querySelectorAll('section');
+    const animations = ['zoom-in', 'slide-left', 'slide-right', 'fade-in-up', 'rotate-in', 'bounce-in'];
+
+    sections.forEach(section => {
+      const animation = animations[Math.floor(Math.random() * animations.length)];
+      section.classList.add(animation);
+    });
+
+    const observer = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          obs.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.15
+    });
+
+    sections.forEach(section => {
+      observer.observe(section);
+    });
+  </script>
+</body>
+</html>

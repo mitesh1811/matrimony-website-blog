@@ -1,0 +1,93 @@
+<head>
+    <title>Add Profile</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+{% include 'navbar.html' %}
+
+<h2>Add New Profile</h2>
+
+<form method="POST" enctype="multipart/form-data" class="form-container">
+    <label>Full Name: <input type="text" name="name" required></label><br>
+    <label>Age: <input type="number" name="age" required></label><br>
+    <label>Gender:
+        <select name="gender" required>
+            <option value="">--Select--</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+        </select>
+    </label><br>
+
+    <label>Caste: <input type="text" name="caste" required></label><br>
+    <label>Religion: <input type="text" name="religion"></label><br>
+    <label>Mother Tongue: <input type="text" name="mother_tongue"></label><br>
+
+    <label>Education: <input type="text" name="education"></label><br>
+    <label>Occupation: <input type="text" name="occupation"></label><br>
+    <label>Annual Income: <input type="text" name="income"></label><br>
+
+    <label>Diet:
+        <select name="diet">
+            <option value="">--Select--</option>
+            <option value="Vegetarian">Vegetarian</option>
+            <option value="Non-Vegetarian">Non-Vegetarian</option>
+            <option value="Eggetarian">Eggetarian</option>
+        </select>
+    </label><br>
+    <label>Smoking: 
+        <select name="smoking">
+            <option value="">--Select--</option>
+            <option value="No">No</option>
+            <option value="Occasionally">Occasionally</option>
+            <option value="Yes">Yes</option>
+        </select>
+    </label><br>
+    <label>Drinking:
+        <select name="drinking">
+            <option value="">--Select--</option>
+            <option value="No">No</option>
+            <option value="Occasionally">Occasionally</option>
+            <option value="Yes">Yes</option>
+        </select>
+    </label><br>
+
+    <label>Location: <input type="text" name="location"></label><br>
+    <label>City: <input type="text" name="city"></label><br>
+    <label>State: <input type="text" name="state"></label><br>
+    <label>Country: <input type="text" name="country"></label><br>
+
+    <label>Phone Number: <input type="text" name="phone"></label><br>
+    <label>Email: <input type="email" name="email"></label><br>
+
+    <label>Photo: 
+        <input type="file" name="photo" id="photoInput" accept="image/*">
+    </label><br>
+    <img id="photoPreview" src="#" alt="Preview" style="display: none; height: 100px; margin-top: 10px;">
+
+
+    <button type="submit">Add Profile</button>
+</form>
+
+<a href="{{ url_for('dashboard') }}">Back to Dashboard</a>
+
+
+<script>
+    document.getElementById('photoInput').addEventListener('change', function(event) {
+        const preview = document.getElementById('photoPreview');
+        const file = event.target.files[0];
+
+        if (file) {
+            const reader = new FileReader();
+
+            reader.onload = function(e) {
+                preview.src = e.target.result;
+                preview.style.display = 'block';
+            };
+
+            reader.readAsDataURL(file);
+        } else {
+            preview.src = '#';
+            preview.style.display = 'none';
+        }
+    });
+</script>

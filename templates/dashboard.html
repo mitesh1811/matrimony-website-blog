@@ -1,0 +1,49 @@
+<head>
+    <title>Your Page Title</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+  <header>Matrimony Bliss</header>
+<nav>
+  <a href="{{ url_for('home') }}">Home</a>
+  <a href="{{ url_for('news') }}">News</a>
+  <a href="{{ url_for('about') }}">About Us</a>
+  <a href="{{ url_for('contact') }}">Contact Us</a>
+  <a href="{{ url_for('login') }}">Login</a>
+</nav>
+
+{% include 'navbar.html' %}
+
+<h2>All Profiles</h2>
+
+<form method="GET" style="margin-bottom: 20px;">
+    <input type="text" name="query" placeholder="Search by name or phone" value="{{ request.args.get('query', '') }}">
+    <button type="submit">Search</button>
+    <a href="{{ url_for('dashboard') }}">Clear</a>
+</form>
+
+
+
+<div class="profile-grid">
+    {% for profile in profiles %}
+        <div class="profile-card">
+            {% if profile.photo_filename %}
+                <img src="{{ url_for('static', filename='uploads/' + profile.photo_filename) }}" height="120"><br>
+            {% else %}
+                <em>No photo</em><br>
+            {% endif %}
+            <strong>{{ profile.full_name }}</strong><br>
+            Age: {{ profile.age }}<br>
+            Gender: {{ profile.gender }}<br>
+            Caste: {{ profile.caste }}<br>
+            Location: {{ profile.location }}<br>
+            Religion: {{profile.religion}}<br>
+            Occupation: {{profile.occupation}}<br>
+            Income: {{profile.income}}<br>
+            <a href="{{ url_for('view_profile', profile_id=profile.id) }}">View Full Details</a><br>
+            <a href="{{ url_for('find_match', profile_id=profile.id) }}">Find Match</a>
+            <hr>
+        </div>
+    {% endfor %}
+</div>
+

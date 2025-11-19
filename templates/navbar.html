@@ -1,0 +1,13 @@
+<!-- templates/navbar.html -->
+<nav class="navbar">
+    {% if is_master %}
+        <a href="{{ url_for('create_admin') }}">Create Admin</a>
+        <a href="{{ url_for('add_blog') }}">Add Blog</a>
+        <a href="{{ url_for('manage_blogs') }}">Manage Blogs</a> <!-- New Button -->
+    {% endif %}
+    <a href="{{ url_for('add_profile') }}">Add Profile</a>
+    <a href="{{ url_for('edit_profiles') }}">Edit Profiles</a>
+    <a href="{{ url_for('search_profiles') }}">Search Profiles</a>
+    <a href="{{ url_for('dashboard') }}">Back to Dashboard</a>
+    <a href="{{ url_for('logout') }}">Logout</a>
+</nav>

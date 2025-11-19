@@ -1,0 +1,70 @@
+<head>
+    <title>Edit Profile</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+{% include 'navbar.html' %}
+
+<h2>Edit Profile</h2>
+
+<form method="POST" enctype="multipart/form-data" class="form-container">
+    <label>Full Name: <input type="text" name="full_name" value="{{ profile.full_name }}" required></label><br>
+    <label>Age: <input type="number" name="age" value="{{ profile.age }}" required></label><br>
+    
+    <label>Gender:
+        <select name="gender" required>
+            <option value="">--Select--</option>
+            <option value="Male" {% if profile.gender == 'Male' %}selected{% endif %}>Male</option>
+            <option value="Female" {% if profile.gender == 'Female' %}selected{% endif %}>Female</option>
+        </select>
+    </label><br>
+
+    <label>Caste: <input type="text" name="caste" value="{{ profile.caste }}"></label><br>
+    <label>Religion: <input type="text" name="religion" value="{{ profile.religion }}"></label><br>
+    <label>Mother Tongue: <input type="text" name="mother_tongue" value="{{ profile.mother_tongue }}"></label><br>
+
+    <label>Education: <input type="text" name="education" value="{{ profile.education }}"></label><br>
+    <label>Occupation: <input type="text" name="occupation" value="{{ profile.occupation }}"></label><br>
+    <label>Annual Income: <input type="text" name="income" value="{{ profile.income }}"></label><br>
+
+    <label>Diet:
+        <select name="diet">
+            <option value="">--Select--</option>
+            <option value="Vegetarian" {% if profile.diet == 'Vegetarian' %}selected{% endif %}>Vegetarian</option>
+            <option value="Non-Vegetarian" {% if profile.diet == 'Non-Vegetarian' %}selected{% endif %}>Non-Vegetarian</option>
+            <option value="Eggetarian" {% if profile.diet == 'Eggetarian' %}selected{% endif %}>Eggetarian</option>
+        </select>
+    </label><br>
+
+    <label>Smoking:
+        <select name="smoking">
+            <option value="">--Select--</option>
+            <option value="No" {% if profile.smoking == 'No' %}selected{% endif %}>No</option>
+            <option value="Occasionally" {% if profile.smoking == 'Occasionally' %}selected{% endif %}>Occasionally</option>
+            <option value="Yes" {% if profile.smoking == 'Yes' %}selected{% endif %}>Yes</option>
+        </select>
+    </label><br>
+
+    <label>Drinking:
+        <select name="drinking">
+            <option value="">--Select--</option>
+            <option value="No" {% if profile.drinking == 'No' %}selected{% endif %}>No</option>
+            <option value="Occasionally" {% if profile.drinking == 'Occasionally' %}selected{% endif %}>Occasionally</option>
+            <option value="Yes" {% if profile.drinking == 'Yes' %}selected{% endif %}>Yes</option>
+        </select>
+    </label><br>
+
+    <label>Location: <input type="text" name="location" value="{{ profile.location }}"></label><br>
+    <label>City: <input type="text" name="city" value="{{ profile.city }}"></label><br>
+    <label>State: <input type="text" name="state" value="{{ profile.state }}"></label><br>
+    <label>Country: <input type="text" name="country" value="{{ profile.country }}"></label><br>
+
+    <label>Phone Number: <input type="text" name="phone" value="{{ profile.phone }}"></label><br>
+    <label>Email: <input type="email" name="email" value="{{ profile.email }}"></label><br>
+
+    <label>Change Photo: <input type="file" name="photo"></label><br>
+
+    <button type="submit">Update Profile</button>
+</form>
+
+<a href="{{ url_for('edit_profiles') }}">Back to All Profiles</a>

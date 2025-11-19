@@ -1,0 +1,11 @@
+<head>
+    <title>Your Page Title</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+{% include 'navbar.html' %}
+<form method="POST">
+    <label>Username: <input type="text" name="username"></label><br>
+    <label>Password: <input type="password" name="password"></label><br>
+    <label>Is Master: <input type="checkbox" name="is_master"></label><br>
+    <button type="submit">Create Admin</button>
+</form>

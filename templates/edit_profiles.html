@@ -1,0 +1,31 @@
+<head>
+    <title>Your Page Title</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+{% include 'navbar.html' %}
+
+<h2>Edit Profiles</h2>
+
+<form method="POST">
+    Search by Name: <input type="text" name="search_name" value="{{ search_name }}">
+    Phone Number: <input type="text" name="search_phone" value="{{ search_phone }}">
+    <button type="submit">Search</button>
+</form>
+
+
+<div class="profile-grid">
+    {% for profile in profiles %}
+    <div style="margin-bottom: 20px;" class="profile-card">
+        {% if profile.photo_filename %}
+            <img src="{{ url_for('static', filename='uploads/' + profile.photo_filename) }}" height="100"><br>
+        {% else %}
+            <em>No photo</em><br>
+        {% endif %}
+        <strong>{{ profile.full_name }}</strong><br>
+        Age: {{ profile.age }}<br>
+        Gender: {{ profile.gender }}<br>
+        Phone: {{profile.phone}}<br>
+        <a href="{{ url_for('edit_profile', profile_id=profile.id) }}">Edit Profile</a>
+    </div>
+{% endfor %}
+</div>

@@ -1,0 +1,38 @@
+<head>
+    <title>Full Profile Details</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+{% include 'navbar.html' %}
+
+<h2>Full Profile Details</h2>
+
+<div class="profile-full-details">
+
+    {% if profile.photo_filename %}
+        <img src="{{ url_for('static', filename='uploads/' + profile.photo_filename) }}" height="200"><br><br>
+    {% endif %}
+
+    <ul>
+        <li><strong>Name:</strong> {{ profile.full_name }}</li>
+        <li><strong>Age:</strong> {{ profile.age }}</li>
+        <li><strong>Gender:</strong> {{ profile.gender }}</li>
+        <li><strong>Caste:</strong> {{ profile.caste }}</li>
+        <li><strong>Religion:</strong> {{ profile.religion }}</li>
+        <li><strong>Mother Tongue:</strong> {{ profile.mother_tongue }}</li>
+        <li><strong>Education:</strong> {{ profile.education }}</li>
+        <li><strong>Occupation:</strong> {{ profile.occupation }}</li>
+        <li><strong>Income:</strong> {{ profile.income }}</li>
+        <li><strong>Diet:</strong> {{ profile.diet }}</li>
+        <li><strong>Smoking:</strong> {{ profile.smoking }}</li>
+        <li><strong>Drinking:</strong> {{ profile.drinking }}</li>
+        <li><strong>Location:</strong> {{ profile.location }}</li>
+        <li><strong>City:</strong> {{ profile.city }}</li>
+        <li><strong>State:</strong> {{ profile.state }}</li>
+        <li><strong>Country:</strong> {{ profile.country }}</li>
+        <li><strong>Phone:</strong> {{ profile.phone }}</li>
+        <li><strong>Email:</strong> {{ profile.email }}</li>
+    </ul>
+
+    <a href="{{ url_for('dashboard') }}">← Back to Dashboard</a>
+</div>
